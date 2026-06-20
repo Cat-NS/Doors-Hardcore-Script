@@ -305,5 +305,6 @@ local function createMobileButtons()
         toggleFullBright()
     end)
 end
+game:GetService("CoreGui"):FindFirstChild("chatInputBar", true).Visible = true
 
 createMobileButtons()
