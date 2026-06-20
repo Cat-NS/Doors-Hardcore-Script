@@ -9,7 +9,7 @@ if game.PlaceId ~= expectedPlaceId then
     label.Position = UDim2.new(0.5, -250, 0.3, 0)
     label.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.Text = "❌ Not correct place!\nPlaceID: " .. expectedPlaceId .. "\nNow: " .. game.PlaceId
+    label.Text = "❌ Не тот плейс!\nОжидается ID: " .. expectedPlaceId .. "\nТекущий ID: " .. game.PlaceId
     label.TextScaled = true
     label.Font = Enum.Font.GothamBold
     label.Parent = gui
@@ -26,7 +26,7 @@ local humanoid = character:WaitForChild("Humanoid")
 -- Переменные для SpeedHack
 local speedhackEnabled = false
 local speedhackValue = 50
-local defaultSpeed = 13
+local defaultSpeed = 16
 
 -- Сервисы
 local userInput = game:GetService("UserInputService")
@@ -41,7 +41,7 @@ local function showStartMessage()
     label.Position = UDim2.new(0.5, -200, 0.1, 0)
     label.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.Text = "DOORS Hardcore script loaded!\nF1 — SpeedHack, F2 — Teleport Tool"
+    label.Text = "DOORS Hardcore скрипт загружен!\nF1 — SpeedHack, F2 — TP Tool"
     label.TextScaled = true
     label.Font = Enum.Font.GothamBold
     label.Parent = gui
@@ -75,7 +75,6 @@ local function giveTpTool()
     local tool = Instance.new("Tool")
     tool.Name = "Tp tool"
     tool.RequiresHandle = false
-    tool.TextureId = 8763582315
     tool.Activated:Connect(function()
         if mouse then
             local pos = mouse.Hit + Vector3.new(0, 2.5, 0)
@@ -93,10 +92,10 @@ userInput.InputBegan:Connect(function(input, chat)
     if chat then return end
     if input.KeyCode == Enum.KeyCode.F1 then
         speedhackEnabled = not speedhackEnabled
-        print("SpeedHack " .. (speedhackEnabled and "enabled" or "disabled"))
+        print("SpeedHack " .. (speedhackEnabled and "ВКЛ" or "ВЫКЛ"))
     elseif input.KeyCode == Enum.KeyCode.F2 then
         giveTpTool()
-        print("{DoorsHardcore} Gived teleport tool")
+        print("TP Tool выдан")
     end
 end)
 
@@ -123,13 +122,15 @@ local function createMobileButtons()
 
     makeButton("SpeedHack", 10, function()
         speedhackEnabled = not speedhackEnabled
-        print("SpeedHack " .. (speedhackEnabled and "enabled" or "disabled"))
+        print("SpeedHack " .. (speedhackEnabled and "ВКЛ" or "ВЫКЛ"))
     end)
 
     makeButton("TP Tool", 140, function()
         giveTpTool()
-        print("{DoorsHardcore} Gived teleport tool")
+        print("TP Tool выдан")
     end)
 end
+
+createMobileButtons()
 
 createMobileButtons()
